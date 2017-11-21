@@ -3,17 +3,18 @@ def read_recipes():
         recipe_dict = {}
 
         for line in f:
-            dish_name = line
+            dish_name = line.rstrip()
             quantity = int(f.readline())
             ingr_list = []
 
             for i in range(quantity):
-                ingr = list(f.readline().split(' | '))
+                ingr = list(f.readline().rstrip().split(' | '))
                 ingr_dict = {}
-                ingr_dict.update({'ingredient_name': ingr[0], 'quantity': int(ingr[1]), 'measure': ingr[2].rstrip('\n')})
+                ingr_dict.update({'ingredient_name': ingr[0], 'quantity': int(ingr[1]), \
+                    'measure': ingr[2]})
                 ingr_list.append(ingr_dict)
 
-            recipe_dict[dish_name.rstrip('\n')] = ingr_list
+            recipe_dict[dish_name] = ingr_list
             f.readline()
         return recipe_dict
 
